@@ -1,0 +1,664 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbProyBoletasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="area">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="boleta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nro_orden" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="fecha_inicio" Type="date" Nullable="false" />
+          <Property Name="fecha_asignacion" Type="date" Nullable="false" />
+          <Property Name="fecha_fin" Type="date" Nullable="false" />
+          <Property Name="hora_inicio" Type="datetime" Nullable="false" />
+          <Property Name="hora_asignacion" Type="datetime" />
+          <Property Name="hora_fin" Type="datetime" Nullable="false" />
+          <Property Name="prioridad" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="id_usr" Type="int" Nullable="false" />
+          <Property Name="id_pers" Type="int" Nullable="false" />
+          <Property Name="id_serv" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="persona">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="apellidop" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="apellidom" Type="varchar" MaxLength="20" />
+          <Property Name="ci" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="direccion" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="telefono" Type="int" Nullable="false" />
+          <Property Name="tipo_per" Type="int" Nullable="false" />
+          <Property Name="id_area" Type="int" Nullable="false" />
+          <Property Name="sexo" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="servicio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="tipo_ser" Type="int" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="solucion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar(max)" />
+          <Property Name="id_boleta" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipo_persona">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipo_servicio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipo_usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre_usuario" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="password_usuario" Type="varbinary(max)" Nullable="false" />
+          <Property Name="id_usr" Type="int" Nullable="false" />
+          <Property Name="estado" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__boleta__id_pers__6D0D32F4">
+          <End Role="persona" Type="Self.persona" Multiplicity="1" />
+          <End Role="boleta" Type="Self.boleta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="boleta">
+              <PropertyRef Name="id_pers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__boleta__id_serv__6E01572D">
+          <End Role="servicio" Type="Self.servicio" Multiplicity="1" />
+          <End Role="boleta" Type="Self.boleta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servicio">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="boleta">
+              <PropertyRef Name="id_serv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__boleta__id_usr__6C190EBB">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="boleta" Type="Self.boleta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="boleta">
+              <PropertyRef Name="id_usr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__persona__id_area__59063A47">
+          <End Role="area" Type="Self.area" Multiplicity="1" />
+          <End Role="persona" Type="Self.persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="area">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="persona">
+              <PropertyRef Name="id_area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__persona__tipo_pe__5812160E">
+          <End Role="tipo_persona" Type="Self.tipo_persona" Multiplicity="1" />
+          <End Role="persona" Type="Self.persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_persona">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="persona">
+              <PropertyRef Name="tipo_per" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__servicio__tipo_s__68487DD7">
+          <End Role="tipo_servicio" Type="Self.tipo_servicio" Multiplicity="1" />
+          <End Role="servicio" Type="Self.servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_servicio">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="servicio">
+              <PropertyRef Name="tipo_ser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__solucion__id_bol__70DDC3D8">
+          <End Role="boleta" Type="Self.boleta" Multiplicity="1" />
+          <End Role="solucion" Type="Self.solucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="boleta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="solucion">
+              <PropertyRef Name="id_boleta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__usuario__id__5FB337D6">
+          <End Role="persona" Type="Self.persona" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__usuario__id_usr__60A75C0F">
+          <End Role="tipo_usuario" Type="Self.tipo_usuario" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="id_usr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbProyBoletasModelStoreContainer">
+          <EntitySet Name="area" EntityType="Self.area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="boleta" EntityType="Self.boleta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="persona" EntityType="Self.persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="servicio" EntityType="Self.servicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="solucion" EntityType="Self.solucion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipo_persona" EntityType="Self.tipo_persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipo_servicio" EntityType="Self.tipo_servicio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipo_usuario" EntityType="Self.tipo_usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__boleta__id_pers__6D0D32F4" Association="Self.FK__boleta__id_pers__6D0D32F4">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="boleta" EntitySet="boleta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__boleta__id_serv__6E01572D" Association="Self.FK__boleta__id_serv__6E01572D">
+            <End Role="servicio" EntitySet="servicio" />
+            <End Role="boleta" EntitySet="boleta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__boleta__id_usr__6C190EBB" Association="Self.FK__boleta__id_usr__6C190EBB">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="boleta" EntitySet="boleta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__persona__id_area__59063A47" Association="Self.FK__persona__id_area__59063A47">
+            <End Role="area" EntitySet="area" />
+            <End Role="persona" EntitySet="persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK__persona__tipo_pe__5812160E" Association="Self.FK__persona__tipo_pe__5812160E">
+            <End Role="tipo_persona" EntitySet="tipo_persona" />
+            <End Role="persona" EntitySet="persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK__servicio__tipo_s__68487DD7" Association="Self.FK__servicio__tipo_s__68487DD7">
+            <End Role="tipo_servicio" EntitySet="tipo_servicio" />
+            <End Role="servicio" EntitySet="servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__solucion__id_bol__70DDC3D8" Association="Self.FK__solucion__id_bol__70DDC3D8">
+            <End Role="boleta" EntitySet="boleta" />
+            <End Role="solucion" EntitySet="solucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__usuario__id__5FB337D6" Association="Self.FK__usuario__id__5FB337D6">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__usuario__id_usr__60A75C0F" Association="Self.FK__usuario__id_usr__60A75C0F">
+            <End Role="tipo_usuario" EntitySet="tipo_usuario" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbProyBoletasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="area">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="25" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="persona" Relationship="Self.FK__persona__id_area__59063A47" FromRole="area" ToRole="persona" />
+        </EntityType>
+        <EntityType Name="boleta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nro_orden" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fecha_asignacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fecha_fin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hora_inicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hora_asignacion" Type="DateTime" Precision="3" />
+          <Property Name="hora_fin" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="prioridad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_usr" Type="Int32" Nullable="false" />
+          <Property Name="id_pers" Type="Int32" Nullable="false" />
+          <Property Name="id_serv" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="persona" Relationship="Self.FK__boleta__id_pers__6D0D32F4" FromRole="boleta" ToRole="persona" />
+          <NavigationProperty Name="servicio" Relationship="Self.FK__boleta__id_serv__6E01572D" FromRole="boleta" ToRole="servicio" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK__boleta__id_usr__6C190EBB" FromRole="boleta" ToRole="usuario" />
+          <NavigationProperty Name="solucion" Relationship="Self.FK__solucion__id_bol__70DDC3D8" FromRole="boleta" ToRole="solucion" />
+        </EntityType>
+        <EntityType Name="persona">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidop" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ci" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="direccion" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono" Type="Int32" Nullable="false" />
+          <Property Name="tipo_per" Type="Int32" Nullable="false" />
+          <Property Name="id_area" Type="Int32" Nullable="false" />
+          <Property Name="sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="area" Relationship="Self.FK__persona__id_area__59063A47" FromRole="persona" ToRole="area" />
+          <NavigationProperty Name="boleta" Relationship="Self.FK__boleta__id_pers__6D0D32F4" FromRole="persona" ToRole="boleta" />
+          <NavigationProperty Name="tipo_persona" Relationship="Self.FK__persona__tipo_pe__5812160E" FromRole="persona" ToRole="tipo_persona" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK__usuario__id__5FB337D6" FromRole="persona" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="servicio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipo_ser" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="boleta" Relationship="Self.FK__boleta__id_serv__6E01572D" FromRole="servicio" ToRole="boleta" />
+          <NavigationProperty Name="tipo_servicio" Relationship="Self.FK__servicio__tipo_s__68487DD7" FromRole="servicio" ToRole="tipo_servicio" />
+        </EntityType>
+        <EntityType Name="solucion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id_boleta" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="boleta" Relationship="Self.FK__solucion__id_bol__70DDC3D8" FromRole="solucion" ToRole="boleta" />
+        </EntityType>
+        <EntityType Name="tipo_persona">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="25" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="persona" Relationship="Self.FK__persona__tipo_pe__5812160E" FromRole="tipo_persona" ToRole="persona" />
+        </EntityType>
+        <EntityType Name="tipo_servicio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="servicio" Relationship="Self.FK__servicio__tipo_s__68487DD7" FromRole="tipo_servicio" ToRole="servicio" />
+        </EntityType>
+        <EntityType Name="tipo_usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="25" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK__usuario__id_usr__60A75C0F" FromRole="tipo_usuario" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre_usuario" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password_usuario" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="id_usr" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="boleta" Relationship="Self.FK__boleta__id_usr__6C190EBB" FromRole="usuario" ToRole="boleta" />
+          <NavigationProperty Name="persona" Relationship="Self.FK__usuario__id__5FB337D6" FromRole="usuario" ToRole="persona" />
+          <NavigationProperty Name="tipo_usuario" Relationship="Self.FK__usuario__id_usr__60A75C0F" FromRole="usuario" ToRole="tipo_usuario" />
+        </EntityType>
+        <Association Name="FK__persona__id_area__59063A47">
+          <End Role="area" Type="Self.area" Multiplicity="1" />
+          <End Role="persona" Type="Self.persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="area">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="persona">
+              <PropertyRef Name="id_area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__boleta__id_pers__6D0D32F4">
+          <End Role="persona" Type="Self.persona" Multiplicity="1" />
+          <End Role="boleta" Type="Self.boleta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="boleta">
+              <PropertyRef Name="id_pers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__boleta__id_serv__6E01572D">
+          <End Role="servicio" Type="Self.servicio" Multiplicity="1" />
+          <End Role="boleta" Type="Self.boleta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="servicio">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="boleta">
+              <PropertyRef Name="id_serv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__boleta__id_usr__6C190EBB">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="boleta" Type="Self.boleta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="boleta">
+              <PropertyRef Name="id_usr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__solucion__id_bol__70DDC3D8">
+          <End Role="boleta" Type="Self.boleta" Multiplicity="1" />
+          <End Role="solucion" Type="Self.solucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="boleta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="solucion">
+              <PropertyRef Name="id_boleta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__persona__tipo_pe__5812160E">
+          <End Role="tipo_persona" Type="Self.tipo_persona" Multiplicity="1" />
+          <End Role="persona" Type="Self.persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_persona">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="persona">
+              <PropertyRef Name="tipo_per" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__usuario__id__5FB337D6">
+          <End Role="persona" Type="Self.persona" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__servicio__tipo_s__68487DD7">
+          <End Role="tipo_servicio" Type="Self.tipo_servicio" Multiplicity="1" />
+          <End Role="servicio" Type="Self.servicio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_servicio">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="servicio">
+              <PropertyRef Name="tipo_ser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__usuario__id_usr__60A75C0F">
+          <End Role="tipo_usuario" Type="Self.tipo_usuario" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="id_usr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbProyBoletaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="area" EntityType="Self.area" />
+          <EntitySet Name="boleta" EntityType="Self.boleta" />
+          <EntitySet Name="persona" EntityType="Self.persona" />
+          <EntitySet Name="servicio" EntityType="Self.servicio" />
+          <EntitySet Name="solucion" EntityType="Self.solucion" />
+          <EntitySet Name="tipo_persona" EntityType="Self.tipo_persona" />
+          <EntitySet Name="tipo_servicio" EntityType="Self.tipo_servicio" />
+          <EntitySet Name="tipo_usuario" EntityType="Self.tipo_usuario" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <AssociationSet Name="FK__persona__id_area__59063A47" Association="Self.FK__persona__id_area__59063A47">
+            <End Role="area" EntitySet="area" />
+            <End Role="persona" EntitySet="persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK__boleta__id_pers__6D0D32F4" Association="Self.FK__boleta__id_pers__6D0D32F4">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="boleta" EntitySet="boleta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__boleta__id_serv__6E01572D" Association="Self.FK__boleta__id_serv__6E01572D">
+            <End Role="servicio" EntitySet="servicio" />
+            <End Role="boleta" EntitySet="boleta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__boleta__id_usr__6C190EBB" Association="Self.FK__boleta__id_usr__6C190EBB">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="boleta" EntitySet="boleta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__solucion__id_bol__70DDC3D8" Association="Self.FK__solucion__id_bol__70DDC3D8">
+            <End Role="boleta" EntitySet="boleta" />
+            <End Role="solucion" EntitySet="solucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__persona__tipo_pe__5812160E" Association="Self.FK__persona__tipo_pe__5812160E">
+            <End Role="tipo_persona" EntitySet="tipo_persona" />
+            <End Role="persona" EntitySet="persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK__usuario__id__5FB337D6" Association="Self.FK__usuario__id__5FB337D6">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__servicio__tipo_s__68487DD7" Association="Self.FK__servicio__tipo_s__68487DD7">
+            <End Role="tipo_servicio" EntitySet="tipo_servicio" />
+            <End Role="servicio" EntitySet="servicio" />
+          </AssociationSet>
+          <AssociationSet Name="FK__usuario__id_usr__60A75C0F" Association="Self.FK__usuario__id_usr__60A75C0F">
+            <End Role="tipo_usuario" EntitySet="tipo_usuario" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbProyBoletasModelStoreContainer" CdmEntityContainer="dbProyBoletaEntities">
+          <EntitySetMapping Name="area">
+            <EntityTypeMapping TypeName="dbProyBoletasModel.area">
+              <MappingFragment StoreEntitySet="area">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="boleta">
+            <EntityTypeMapping TypeName="dbProyBoletasModel.boleta">
+              <MappingFragment StoreEntitySet="boleta">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nro_orden" ColumnName="nro_orden" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_asignacion" ColumnName="fecha_asignacion" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="hora_inicio" ColumnName="hora_inicio" />
+                <ScalarProperty Name="hora_asignacion" ColumnName="hora_asignacion" />
+                <ScalarProperty Name="hora_fin" ColumnName="hora_fin" />
+                <ScalarProperty Name="prioridad" ColumnName="prioridad" />
+                <ScalarProperty Name="id_usr" ColumnName="id_usr" />
+                <ScalarProperty Name="id_pers" ColumnName="id_pers" />
+                <ScalarProperty Name="id_serv" ColumnName="id_serv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="persona">
+            <EntityTypeMapping TypeName="dbProyBoletasModel.persona">
+              <MappingFragment StoreEntitySet="persona">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidop" ColumnName="apellidop" />
+                <ScalarProperty Name="apellidom" ColumnName="apellidom" />
+                <ScalarProperty Name="ci" ColumnName="ci" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="tipo_per" ColumnName="tipo_per" />
+                <ScalarProperty Name="id_area" ColumnName="id_area" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="servicio">
+            <EntityTypeMapping TypeName="dbProyBoletasModel.servicio">
+              <MappingFragment StoreEntitySet="servicio">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="tipo_ser" ColumnName="tipo_ser" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="solucion">
+            <EntityTypeMapping TypeName="dbProyBoletasModel.solucion">
+              <MappingFragment StoreEntitySet="solucion">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="id_boleta" ColumnName="id_boleta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_persona">
+            <EntityTypeMapping TypeName="dbProyBoletasModel.tipo_persona">
+              <MappingFragment StoreEntitySet="tipo_persona">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_servicio">
+            <EntityTypeMapping TypeName="dbProyBoletasModel.tipo_servicio">
+              <MappingFragment StoreEntitySet="tipo_servicio">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_usuario">
+            <EntityTypeMapping TypeName="dbProyBoletasModel.tipo_usuario">
+              <MappingFragment StoreEntitySet="tipo_usuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="dbProyBoletasModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+                <ScalarProperty Name="password_usuario" ColumnName="password_usuario" />
+                <ScalarProperty Name="id_usr" ColumnName="id_usr" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

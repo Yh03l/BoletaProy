@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -121,8 +129,59 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Person\areasController.cs" />
+    <Compile Include="Controllers\Person\personasController.cs" />
+    <Compile Include="Controllers\Person\tipo_personaController.cs" />
+    <Compile Include="Controllers\Services\serviciosController.cs" />
+    <Compile Include="Controllers\Services\tipo_servicioController.cs" />
+    <Compile Include="Controllers\Ticket\boletasController.cs" />
+    <Compile Include="Controllers\Ticket\solucionsController.cs" />
+    <Compile Include="Controllers\User\tipo_usuarioController.cs" />
+    <Compile Include="Controllers\User\usuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\area.cs">
+      <DependentUpon>ModelProyBoletas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\boleta.cs">
+      <DependentUpon>ModelProyBoletas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelProyBoletas.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelProyBoletas.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelProyBoletas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelProyBoletas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelProyBoletas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelProyBoletas.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\persona.cs">
+      <DependentUpon>ModelProyBoletas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\servicio.cs">
+      <DependentUpon>ModelProyBoletas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\solucion.cs">
+      <DependentUpon>ModelProyBoletas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tipo_persona.cs">
+      <DependentUpon>ModelProyBoletas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tipo_servicio.cs">
+      <DependentUpon>ModelProyBoletas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tipo_usuario.cs">
+      <DependentUpon>ModelProyBoletas.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\usuario.cs">
+      <DependentUpon>ModelProyBoletas.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -135,8 +194,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\ModelProyBoletas.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelProyBoletas.edmx</DependentUpon>
+      <LastGenOutput>ModelProyBoletas.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModelProyBoletas.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelProyBoletas.edmx</DependentUpon>
+      <LastGenOutput>ModelProyBoletas.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\ModelProyBoletas.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelProyBoletas.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModelProyBoletas.edmx.diagram">
+      <DependentUpon>ModelProyBoletas.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -162,10 +238,54 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\tipo_servicio\Create.cshtml" />
+    <Content Include="Views\tipo_servicio\Delete.cshtml" />
+    <Content Include="Views\tipo_servicio\Details.cshtml" />
+    <Content Include="Views\tipo_servicio\Edit.cshtml" />
+    <Content Include="Views\tipo_servicio\Index.cshtml" />
+    <Content Include="Views\servicios\Create.cshtml" />
+    <Content Include="Views\servicios\Delete.cshtml" />
+    <Content Include="Views\servicios\Details.cshtml" />
+    <Content Include="Views\servicios\Edit.cshtml" />
+    <Content Include="Views\servicios\Index.cshtml" />
+    <Content Include="Views\areas\Create.cshtml" />
+    <Content Include="Views\areas\Delete.cshtml" />
+    <Content Include="Views\areas\Details.cshtml" />
+    <Content Include="Views\areas\Edit.cshtml" />
+    <Content Include="Views\areas\Index.cshtml" />
+    <Content Include="Views\tipo_persona\Create.cshtml" />
+    <Content Include="Views\tipo_persona\Delete.cshtml" />
+    <Content Include="Views\tipo_persona\Details.cshtml" />
+    <Content Include="Views\tipo_persona\Edit.cshtml" />
+    <Content Include="Views\tipo_persona\Index.cshtml" />
+    <Content Include="Views\personas\Create.cshtml" />
+    <Content Include="Views\personas\Delete.cshtml" />
+    <Content Include="Views\personas\Details.cshtml" />
+    <Content Include="Views\personas\Edit.cshtml" />
+    <Content Include="Views\personas\Index.cshtml" />
+    <Content Include="Views\tipo_usuario\Create.cshtml" />
+    <Content Include="Views\tipo_usuario\Delete.cshtml" />
+    <Content Include="Views\tipo_usuario\Details.cshtml" />
+    <Content Include="Views\tipo_usuario\Edit.cshtml" />
+    <Content Include="Views\tipo_usuario\Index.cshtml" />
+    <Content Include="Views\usuarios\Create.cshtml" />
+    <Content Include="Views\usuarios\Delete.cshtml" />
+    <Content Include="Views\usuarios\Details.cshtml" />
+    <Content Include="Views\usuarios\Edit.cshtml" />
+    <Content Include="Views\usuarios\Index.cshtml" />
+    <Content Include="Views\solucions\Create.cshtml" />
+    <Content Include="Views\solucions\Delete.cshtml" />
+    <Content Include="Views\solucions\Details.cshtml" />
+    <Content Include="Views\solucions\Edit.cshtml" />
+    <Content Include="Views\solucions\Index.cshtml" />
+    <Content Include="Views\boletas\Create.cshtml" />
+    <Content Include="Views\boletas\Delete.cshtml" />
+    <Content Include="Views\boletas\Details.cshtml" />
+    <Content Include="Views\boletas\Edit.cshtml" />
+    <Content Include="Views\boletas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -179,6 +299,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

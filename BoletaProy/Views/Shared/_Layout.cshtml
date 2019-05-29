@@ -17,13 +17,52 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nombre de aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Sistema de Tickets", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkPersonas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PERSONAS</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkPersonas">
+                            <a class="dropdown-item">@Html.ActionLink("Lista", "Index", "personas")</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item">@Html.ActionLink("Categorías", "Index", "tipo_persona")</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkPersonas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">BOLETAS</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkPersonas">
+                            <a class="dropdown-item">@Html.ActionLink("Boletas", "Index", "boletas")</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item">@Html.ActionLink("Soluciones", "Index", "solucions")</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkPersonas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">USUARIOS</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkPersonas">
+                            <a class="dropdown-item">@Html.ActionLink("Usuarios", "Index", "usuarios")</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item">@Html.ActionLink("Categorías", "Index", "tipo_usuario")</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkPersonas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SERVICIOS</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkPersonas">
+                            <a class="dropdown-item">@Html.ActionLink("Servicios", "Index", "servicios")</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item">@Html.ActionLink("Categoría", "Index", "tipo_servicio")</a>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkPersonas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ACERCA DE...</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkPersonas">
+                            <a class="dropdown-item">@Html.ActionLink("Nosotros", "About", "Home")</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item">@Html.ActionLink("Contacto", "Contact", "Home")</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>

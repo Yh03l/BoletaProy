@@ -1,0 +1,123 @@
+﻿@model BoletaProy.Models.boleta
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>boleta</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nro_orden)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nro_orden)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_inicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_inicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_asignacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_asignacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_fin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_fin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hora_inicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hora_inicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hora_asignacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hora_asignacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hora_fin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hora_fin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prioridad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prioridad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.persona.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.persona.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.servicio.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.servicio.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario.nombre_usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario.nombre_usuario)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
