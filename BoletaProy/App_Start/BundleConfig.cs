@@ -9,15 +9,7 @@ namespace BoletaProy
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Content/vendor/jquery/jquery.min.js",
-                        "~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js",
-                        "~/Content/vendor/jquery-easing/jquery.easing.min.js",
-                        "~/Content/vendor/chart.js/Chart.min.js",
-                        "~/Content/vendor/datatables/jquery.dataTables.js",
-                        "~/Content/vendor/datatables/dataTables.bootstrap4.js",
-                        "~/Content/js/sb-admin.min.js",
-                        "~/Content/js/demo/datatables-demo.js",
-                        "~/Content/js/demo/chart-area-demo.js"));
+                        "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -31,11 +23,8 @@ namespace BoletaProy
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/vendor/fontawesome-free/css/all.min.css",
-                      "~/Content/vendor/datatables/dataTables.bootstrap4.css",
-                      "~/Content/css/sb-admin.css"));
-
-
-        } }
+                      "~/Content/bootstrap.css",
+                      "~/Content/site.css"));
+        }
+    }
 }
- 
